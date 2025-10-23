@@ -1,0 +1,14 @@
+{
+  "name": "NestJS Skill Check Dev Container",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "nestjs-skill-check",
+  "workspaceFolder": "/usr/src/app",
+  "forwardPorts": [3000],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.vscode-typescript-next"
+      ]
+    }
+  }
+}

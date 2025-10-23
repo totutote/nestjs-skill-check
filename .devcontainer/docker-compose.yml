@@ -1,0 +1,12 @@
+services:
+  nestjs-skill-check:
+    build: .
+    volumes:
+      - ../:/usr/src/app
+    ports:
+      - "3000:3000"
+    working_dir: /usr/src/app
+    shm_size: '2g'
+    command: ["/bin/sh", "-c", "cd nestjs-skill-check && npm run start:dev"]
+    stdin_open: true
+    tty: true
