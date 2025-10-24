@@ -23,7 +23,7 @@ export class JsonEstateTransactionRepository
     this.logger.log(`Loaded ${this.records.length} estate transactions`);
   }
 
-  async findOne(
+  findOne(
     year: number,
     prefectureCode: number,
     type: number,
@@ -34,6 +34,6 @@ export class JsonEstateTransactionRepository
         r.prefectureCode === prefectureCode &&
         r.type === type,
     );
-    return rec ?? null;
+    return Promise.resolve(rec ?? null);
   }
 }

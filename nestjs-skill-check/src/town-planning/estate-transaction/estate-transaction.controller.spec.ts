@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EstateTransactionController } from './estate-transaction.controller';
 import { EstateTransactionService } from './estate-transaction.service';
 import { ESTATE_TRANSACTION_REPOSITORY } from './repositories/estate-transaction.repository';
+import { GetBarQueryDto } from './dto/get-bar.query.dto';
 
 describe('EstateTransactionController', () => {
   let controller: EstateTransactionController;
@@ -35,14 +36,16 @@ describe('EstateTransactionController', () => {
         year: 2015,
         prefectureCode: 8,
         type: 1,
-      };
+      } as GetBarQueryDto;
       const mockResult = 22871;
 
-      jest.spyOn(service, 'findOneValue').mockResolvedValue(mockResult);
+      const findOneValueSpy = jest
+        .spyOn(service, 'findOneValue')
+        .mockResolvedValue(mockResult);
 
-      const result = await controller.getBar(mockQuery as any);
+      const result = await controller.getBar(mockQuery);
 
-      expect(service.findOneValue).toHaveBeenCalledWith(mockQuery);
+      expect(findOneValueSpy).toHaveBeenCalledWith(mockQuery);
       expect(result).toEqual(mockResult);
     });
   });

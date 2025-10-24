@@ -45,7 +45,9 @@ describe('EstateTransactionService', () => {
         },
       };
 
-      jest.spyOn(repository, 'findOne').mockResolvedValue(mockData);
+      const findOneSpy = jest
+        .spyOn(repository, 'findOne')
+        .mockResolvedValue(mockData);
 
       const result = await service.findOneValue({
         year: 2015,
@@ -54,15 +56,18 @@ describe('EstateTransactionService', () => {
       });
 
       expect(result).toBe(324740);
-      expect(repository.findOne).toHaveBeenCalledWith(2015, 13, 1);
+      expect(findOneSpy).toHaveBeenCalledWith(2015, 13, 1);
     });
 
     it('should throw NotFoundException when no data found', async () => {
       jest.spyOn(repository, 'findOne').mockResolvedValue(null);
 
-      await expect(
-        service.findOneValue({ year: 2015, prefectureCode: 13, type: 1 }),
-      ).rejects.toThrow(NotFoundException);
+      const promise = service.findOneValue({
+        year: 2015,
+        prefectureCode: 13,
+        type: 1,
+      });
+      await expect(promise).rejects.toThrow(NotFoundException);
     });
   });
 });
