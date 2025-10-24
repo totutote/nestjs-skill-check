@@ -18,10 +18,6 @@ export class EstateTransactionService {
         `No data for year=${year}, prefectureCode=${prefectureCode}, type=${type}`,
       );
     }
-    const years = rec.data.result.years;
-    if (!years || years.length === 0) {
-      throw new NotFoundException(`No year data found`);
-    }
-    return years[0].value;
+    return rec.data.result.years[0].value;
   }
 }
