@@ -4,10 +4,12 @@ import { GetBarQueryDto } from './dto/get-bar.query.dto';
 
 @Controller('townPlanning/estateTransaction')
 export class EstateTransactionController {
-  constructor(private readonly estateTransactionService: EstateTransactionService) {}
+  constructor(
+    private readonly estateTransactionService: EstateTransactionService,
+  ) {}
 
   @Get('bar')
-  getBar(@Query() query: GetBarQueryDto) {
-    return this.estateTransactionService.findAll(query);
+  async getBar(@Query() query: GetBarQueryDto) {
+    return this.estateTransactionService.findOneValue(query);
   }
 }
