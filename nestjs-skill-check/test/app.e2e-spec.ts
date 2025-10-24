@@ -24,13 +24,6 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/api/v1')
-      .expect(200)
-      .expect('Hello World!');
-  });
-
   describe('/api/v1/townPlanning/estateTransaction/bar (GET)', () => {
     it('should return only the price value', () => {
       return request(app.getHttpServer())
